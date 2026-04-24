@@ -1,0 +1,91 @@
+-- ============================================
+-- SPEED GLITCH LAUNCHER (UPDATED)
+-- Choose your UI: Rayfield or WindUI
+-- Script disappears after choice
+-- ============================================
+
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "SpeedGlitchLauncher"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0, 340, 0, 240)
+mainFrame.Position = UDim2.new(0.5, -170, 0.5, -120)
+mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+mainFrame.BackgroundTransparency = 0
+mainFrame.BorderSizePixel = 2
+mainFrame.BorderColor3 = Color3.fromRGB(255, 100, 0)
+mainFrame.Active = true
+mainFrame.Draggable = true
+mainFrame.Parent = screenGui
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0, 8)
+uiCorner.Parent = mainFrame
+
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 45)
+title.BackgroundColor3 = Color3.fromRGB(255, 100, 0)
+title.Text = "SPEED GLITCH LAUNCHER"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.Parent = mainFrame
+
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 35, 0, 35)
+closeBtn.Position = UDim2.new(1, -40, 0, 5)
+closeBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeBtn.Text = "X"
+closeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeBtn.TextScaled = true
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.Parent = title
+closeBtn.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+local function loadScript(url)
+    screenGui:Destroy()
+    loadstring(game:HttpGet(url))()
+end
+
+local function createButton(text, yPos, color, url)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(0, 280, 0, 55)
+    btn.Position = UDim2.new(0.5, -140, 0, yPos)
+    btn.BackgroundColor3 = color
+    btn.Text = text
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextScaled = true
+    btn.Font = Enum.Font.GothamBold
+    btn.Parent = mainFrame
+    
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = btn
+    
+    btn.MouseButton1Click:Connect(function()
+        loadScript(url)
+    end)
+end
+
+-- RAYFIELD BUTTON (ОБНОВЛЁННАЯ ССЫЛКА)
+createButton("RAYFIELD VERSION", 65, Color3.fromRGB(0, 100, 255), "https://raw.githubusercontent.com/softwnwrrl/Speed-glitch-rayfield/refs/heads/main/Speed%20glitch.lua")
+
+-- WINDUI BUTTON (СТАРАЯ ССЫЛКА)
+createButton("WINDUI VERSION", 140, Color3.fromRGB(0, 150, 100), "https://raw.githubusercontent.com/softwnwrrl/Speed-glitch-wind-ui/refs/heads/main/Speed%20glitch%20wind%20ui")
+
+local info = Instance.new("TextLabel")
+info.Size = UDim2.new(0, 300, 0, 25)
+info.Position = UDim2.new(0.5, -150, 0, 210)
+info.BackgroundTransparency = 1
+info.Text = "Select version to load"
+info.TextColor3 = Color3.fromRGB(180, 180, 180)
+info.TextSize = 13
+info.Font = Enum.Font.Gotham
+info.Parent = mainFrame
+
+print("Launcher ready. Click a button to load the script.")
